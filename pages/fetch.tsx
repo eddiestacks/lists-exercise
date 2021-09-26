@@ -28,8 +28,8 @@ const Fetch: NextPage = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((list: []) => {
-              return list.map(item)
+            {Object.keys(data).map((listId) => {
+              return data[listId].map(item)
             })}
           </tbody>
         </table>
