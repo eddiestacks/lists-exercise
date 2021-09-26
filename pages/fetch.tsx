@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import item from '../components/item'
-import sortLists from '../lib/sort'
 import useListItems from '../api/useListItems'
 
 const Fetch: NextPage = () => {
@@ -9,8 +8,6 @@ const Fetch: NextPage = () => {
 
   if (error) return <div>failed to load</div>
   if (!data) return <div>loading...</div>
-
-  const sortedLists = sortLists(data)
 
   return (
     <div>
@@ -31,7 +28,7 @@ const Fetch: NextPage = () => {
             </tr>
           </thead>
           <tbody>
-            {sortedLists.map((list) => {
+            {data.map((list: []) => {
               return list.map(item)
             })}
           </tbody>
