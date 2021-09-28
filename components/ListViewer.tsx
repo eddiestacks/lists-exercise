@@ -78,9 +78,6 @@ export default function ListViewer({ lists }: componentProps) {
                 </Transition>
               </div>
             </Listbox>
-
-
-
           </div>
 
           <ul role="list" className="divide-y divide-gray-200 px-4">
