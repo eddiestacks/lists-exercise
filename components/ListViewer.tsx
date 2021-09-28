@@ -8,18 +8,18 @@ type componentProps = {
   lists: SortedLists
 }
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function ListViewer({ lists }: componentProps) {
   const listIds = Object.keys(lists)
   const [selected, setSelected] = useState(listIds[0])
-  const [listData, setListData] = useState(lists[selected])
+  const [listData, setListData] = useState(lists[parseInt(selected)])
 
   const handleSelect = (listId: string) => {
     setSelected(listId)
-    setListData(lists[selected])
+    setListData(lists[parseInt(selected)])
   }
 
   return (
