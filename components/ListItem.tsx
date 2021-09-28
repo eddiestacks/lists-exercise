@@ -5,8 +5,9 @@ type componentProps = {
 }
 
 export default function ListItem({ item }: componentProps) {
-  console.log(item)
   return (
-    <li>{item.listId}</li>
+    <li className="py-4 flex">
+      <p className="text-sm font-medium text-gray-900">{item.name}</p>
+    </li>
   )
 }

@@ -3,6 +3,7 @@ import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 import { SortedLists } from '../interfaces/sortedLists'
 import { Item } from '../interfaces/item'
+import ListItem from './ListItem'
 
 type componentProps = {
   lists: SortedLists
@@ -84,9 +85,7 @@ export default function ListViewer({ lists }: componentProps) {
 
           <ul role="list" className="divide-y divide-gray-200 px-4">
             {listData.map((listItem: Item) => (
-              <li key={listItem.id} className="py-4 flex">
-                <p className="text-sm font-medium text-gray-900">{listItem.name}</p>
-              </li>
+              <ListItem key={listItem.id} item={listItem}></ListItem>
             ))}
           </ul>
 
