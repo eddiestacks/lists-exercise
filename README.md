@@ -1,4 +1,4 @@
-View the hosted app [here](https://vercel.com/pritchardpro/lists-exercise/BhAdLPFQpcoNNXxLafWSabCQ2LKc)
+View the hosted app [here](https://lists-exercise.vercel.app/)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
