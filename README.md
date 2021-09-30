@@ -1,8 +1,39 @@
-View the hosted app [here](https://lists-exercise.vercel.app/)
+# Fetch Coding Exercise - Fun with Lists!
+This app was built using [Next.js](https://nextjs.org/) and deployed using [Vercel](https://vercel.com).
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+The app consists of a simple UI built using [TailwindCSS](https://tailwindcss.com). It leverages [SWR](https://swr.vercel.app/) to fetch the data from the provided URL, groups the data by `listId`, and renders a dropdown component to let view the contents of each list. 
 
-## Getting Started
+By default, it's sorting the content alphabetically, but you can use the toggle to resort the lists numerically, if so desired, providing the best of both worlds. 
+
+Additionally, hovering over any list item will render a tooltip showing you the `id` of the list item (given that this data seemed redundant, I didn't feel it needed to be immediately present in the list).
+
+**View a current version of the app [here](https://lists-exercise.vercel.app/).**
+
+## File Structure
+The project follows the standard file structure of any Next.js app, but has a couple additional folders to help with separation of concerns.
+
+- `./api` contains logic for fetching the data using SWR.
+- `./components` contains React TS components that can be re-used throughout the project.
+- `./interfaces` contains TS definitions of interfaces. I opted to use interfaces so that they can be extended, as needed, when imported.
+- `./lib` contains utilities for sorting and concatenating class names
+- `./pages` this is a standard Next.js folder that contains the page components that will automatically generate routes. It also includes the `_app.tsx` component that builds the layout for the app.
+- `/.public` this is a standard Next.js folder that contains public assets.
+- `./styles` this is a standard Next.js folder that contains CSS styles
+
+## Deployment
+As mentioned previously, given the brevity of this exercise, I opted to use Next.js and deploy using Vercel because these two tools are optimized for each other, and make CI/CD a breeze. This strategy could be changed by using GitHub Actions to either build a docker image and deploy on any hosting service that supports Docker, or deploy to any provider that support Node servers, as well.
+
+Currently, with the Vercel option, any time a change is pushed to a branch on GitHub, a new version of the app is deployed to a unique URL so that it can be previewed. Then, whenever a PR is merged to the `main` branch, Vercel will automatically create a production deployment and replace the existing deployment.
+
+
+## Other Improvements
+
+- Could be dockerized
+- Could add integration tests using Cypress
+- The loading and error components could be extracted from the main page component and expanded upon. For now, they are just simple rendered text to illustrate the SWR goodness.
+- I used raw TailwindCSS classes to style the components. If I were building a more production-ready app, I'd consider creating custom CSS classes that use `@apply` Tailwind directives to compose the CSS class. This would clean up the code a bit more and provide more guardrails to keep consistent styling of components like buttons, links, etc across the project.
+
+## Developer Experience - Getting Started
 
 First, run the development server:
 
@@ -19,18 +50,3 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
