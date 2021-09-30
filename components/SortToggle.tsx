@@ -9,7 +9,10 @@ type componentProps = {
 export default function SortToggle({ alphabetical, changeSort }: componentProps) {
 
   return (
-    <Switch.Group as="div" className="flex items-center">
+    <Switch.Group as="div" className="flex items-center justify-end">
+      <Switch.Label as="span" className="mr-3">
+        <span className="text-sm text-gray-500">Alpha Sort</span>
+      </Switch.Label>
       <Switch
         checked={alphabetical}
         onChange={changeSort}
@@ -27,9 +30,6 @@ export default function SortToggle({ alphabetical, changeSort }: componentProps)
           )}
         />
       </Switch>
-      <Switch.Label as="span" className="ml-3">
-        <span className="text-sm text-gray-500">Alpha Sort</span>
-      </Switch.Label>
     </Switch.Group>
   )
 }
