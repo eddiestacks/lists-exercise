@@ -16,11 +16,9 @@ function classNames(...classes: string[]) {
 export default function ListViewer({ lists }: componentProps) {
   const listIds = Object.keys(lists)
   const [selected, setSelected] = useState(listIds[0])
-  const [listData, setListData] = useState(lists[parseInt(selected)])
 
   const handleSelect = (listId: string) => {
     setSelected(listId)
-    setListData(lists[parseInt(selected)])
   }
 
   return (
@@ -81,7 +79,7 @@ export default function ListViewer({ lists }: componentProps) {
           </div>
 
           <ul role="list" className="divide-y divide-gray-200 px-4">
-            {listData.map((listItem: Item) => (
+            {lists[parseInt(selected)].map((listItem: Item) => (
               <ListItem key={listItem.id} item={listItem}></ListItem>
             ))}
           </ul>
