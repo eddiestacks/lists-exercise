@@ -1,5 +1,5 @@
 import { Item } from './item'
 
-export interface SortedLists {
+export interface GroupedLists {
   [key: number]: Item[]
 }

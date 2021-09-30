@@ -1,33 +1,40 @@
 import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
-import { SortedLists } from '../interfaces/sortedLists'
+import { GroupedLists } from '../interfaces/groupedLists'
 import { Item } from '../interfaces/item'
 import ListItem from './ListItem'
+import SortToggle from './SortToggle'
+import { sortList } from '../lib/sort'
+import classNames from '../lib/classNames'
 
 type componentProps = {
-  lists: SortedLists
-}
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
+  lists: GroupedLists
 }
 
 export default function ListViewer({ lists }: componentProps) {
   const listIds = Object.keys(lists)
   const [selected, setSelected] = useState(listIds[0])
-  const [listData, setListData] = useState(lists[parseInt(selected)])
+  const [alphabeticalSort, setAlphabeticalSort] = useState(true)
 
   const handleSelect = (listId: string) => {
     setSelected(listId)
-    setListData(lists[parseInt(selected)])
+  }
+
+  const handleSortChange = () => {
+    setAlphabeticalSort(!alphabeticalSort)
   }
 
   return (
     <div className="py-10 md:w-1/4 mx-auto">
       <div className="bg-white md:shadow sm:rounded-lg">
-        <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">List Groups</h3>
+        <div className="px-4 py-5 sm:px-6 flex">
+          <div className="w-1/2">
+            <h3 className="text-lg leading-6 font-medium text-gray-900">List Groups</h3>
+          </div>
+          <div className="w-1/2">
+            <SortToggle alphabetical={alphabeticalSort} changeSort={handleSortChange}></SortToggle>
+          </div>
         </div>
         <div className="border-t border-gray-200 px-4 py-5 sm:p-0 min-h-full">
           <div className="py-5 px-4">
@@ -81,9 +88,11 @@ export default function ListViewer({ lists }: componentProps) {
           </div>
 
           <ul role="list" className="divide-y divide-gray-200 px-4">
-            {listData.map((listItem: Item) => (
-              <ListItem key={listItem.id} item={listItem}></ListItem>
-            ))}
+            {
+              sortList(lists[parseInt(selected)], alphabeticalSort).map((listItem: Item) => (
+                <ListItem key={listItem.id} item={listItem}></ListItem>
+              ))
+            }
           </ul>
 
         </div>
