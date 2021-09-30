@@ -1,12 +1,13 @@
 import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
-import { SortedLists } from '../interfaces/sortedLists'
+import { GroupedLists } from '../interfaces/groupedLists'
 import { Item } from '../interfaces/item'
 import ListItem from './ListItem'
+import { sortList } from '../lib/sort'
 
 type componentProps = {
-  lists: SortedLists
+  lists: GroupedLists
 }
 
 function classNames(...classes: string[]) {
@@ -16,6 +17,7 @@ function classNames(...classes: string[]) {
 export default function ListViewer({ lists }: componentProps) {
   const listIds = Object.keys(lists)
   const [selected, setSelected] = useState(listIds[0])
+  const [alphabeticalSort, setAlphabeticalSort] = useState(true)
 
   const handleSelect = (listId: string) => {
     setSelected(listId)
@@ -79,9 +81,11 @@ export default function ListViewer({ lists }: componentProps) {
           </div>
 
           <ul role="list" className="divide-y divide-gray-200 px-4">
-            {lists[parseInt(selected)].map((listItem: Item) => (
-              <ListItem key={listItem.id} item={listItem}></ListItem>
-            ))}
+            {
+              sortList(lists[parseInt(selected)], alphabeticalSort).map((listItem: Item) => (
+                <ListItem key={listItem.id} item={listItem}></ListItem>
+              ))
+            }
           </ul>
 
         </div>
